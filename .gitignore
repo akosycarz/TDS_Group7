@@ -1,25 +1,8 @@
 # Data (don’t push)
-data/
-Data/
-*.rds
-*.RData
-*.rda
-*.csv
-*.tsv
-*.xlsx
-*.parquet
+*quet
 *.feather
 *.zip
 *.gz
-
-# Outputs / results
-outputs/
-results/
-figures/
-plots/
-*.pdf
-*.png
-*.jpg
 
 # Logs / temp
 *.log
