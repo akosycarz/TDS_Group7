@@ -1,25 +1,40 @@
-# Data (don’t push)
-*quet
-*.feather
-*.zip
-*.gz
+# --- R / RStudio ---
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+*.Rproj
 
-# Logs / temp
-*.log
+# If you store secrets locally (recommended to ignore)
+.Renviron
+
+# --- Outputs (usually generated) ---
+Output/
+*.html
+*.pdf
+*.png
+*.jpg
+*.csv
+*.tsv
+
+# --- HPC / Slurm logs ---
+slurm-*.out
+slurm-*.err
 *.out
 *.err
-*.o*
-*.e*
-tmp/
-temp/
+*.log
 
-# R / RStudio
-.Rhistory
-.RDataTmp
-.Rproj.user/
-
-# OS/editor
+# --- OS / editor ---
 .DS_Store
 Thumbs.db
-.vscode/
+*.swp
+*~
+
+# --- Large data (choose one strategy) ---
+# Option A: ignore all data (common)
+# Data/
+
+# Option B: keep data structure but ignore raw/temporary parts
+Data/raw/
+Data/tmp/
 
