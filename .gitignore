@@ -1,0 +1,42 @@
+# Data (don’t push)
+data/
+Data/
+*.rds
+*.RData
+*.rda
+*.csv
+*.tsv
+*.xlsx
+*.parquet
+*.feather
+*.zip
+*.gz
+
+# Outputs / results
+outputs/
+results/
+figures/
+plots/
+*.pdf
+*.png
+*.jpg
+
+# Logs / temp
+*.log
+*.out
+*.err
+*.o*
+*.e*
+tmp/
+temp/
+
+# R / RStudio
+.Rhistory
+.RDataTmp
+.Rproj.user/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+
