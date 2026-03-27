@@ -5,8 +5,8 @@ library(htmltools)
 rm(list = ls())
 
 # ---- 1) Load datasets ----
-ukb_cleaned  <- readRDS("/rds/general/project/hda_25-26/live/TDS/TDS_Group7/extraction_and_recoding/outputs/ukb_cleaned.rds")
-ukb_imputed  <- readRDS("/rds/general/project/hda_25-26/live/TDS/TDS_Group7/extraction_and_recoding/outputs/ukb_final_ruben_imputed_500k.rds")
+ukb_cleaned  <- readRDS("../outputs/ukb_cleaned.rds")
+ukb_imputed  <- readRDS("../outputs/ukb_final_ruben_imputed_500k.rds")
 
 # ---- 2) P-value function ----
 pvalue <- function(x, ...) {
@@ -81,7 +81,7 @@ tab1_imputed  <- make_table1(ukb_imputed)
 # ---- 6) Save helper ----
 save_table_png <- function(tab, filename) {
   if (!dir.exists("outputs")) dir.create("outputs", recursive = TRUE)
-  png_file <- file.path("outputs", filename)
+  png_file <- file.path("../outputs", filename)
   tmp_html <- tempfile(fileext = ".html")
   on.exit(unlink(tmp_html), add = TRUE)
   htmltools::save_html(tab, file = tmp_html)

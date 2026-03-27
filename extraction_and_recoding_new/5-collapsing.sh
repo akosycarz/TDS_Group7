@@ -2,12 +2,19 @@
 #PBS -l select=1:ncpus=1:mem=50gb
 #PBS -N extraction
 
-cd /rds/general/project/hda_25-26/live/TDS/TDS_Group7/extraction_and_recoding/scripts
+# Go to the scripts folder inside the directory where qsub was run
+cd "$PBS_O_WORKDIR/scripts" || exit 1
 
-eval "$(~/miniforge3/bin/conda shell.bash hook)"
-source activate r413
+# set log directory
+console_dir=../logs
+mkdir -p "$console_dir"
+
+eval "$(~/anaconda3/bin/conda shell.bash hook)" || exit 1
+
+conda activate r413 || exit 1
 
 ukb_path=/rds/general/project/hda_25-26/live/TDS/General/Data/tabular.tsv
 
-Rscript 5-collapsing.R
+# Run the R script and save console output to logs
+Rscript 5-collapsing.R > "${console_dir}/${PBS_JOBNAME}_${PBS_JOBID}.out" 2>&1
 

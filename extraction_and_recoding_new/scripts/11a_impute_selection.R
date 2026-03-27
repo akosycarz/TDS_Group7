@@ -10,7 +10,7 @@ suppressPackageStartupMessages({
 })
 
 # Define I/O paths
-base         <- "/rds/general/project/hda_25-26/live/TDS/TDS_Group7/extraction_and_recoding/outputs"
+base         <- "../outputs"
 input_path   <- file.path(base, "ukb_selection_60_raw.rds")
 output_path  <- file.path(base, "relevel_ukb_selection_60_imputed_copy.rds")
 model_path   <- file.path(base, "ukb_selection_60_impute_model.rds")

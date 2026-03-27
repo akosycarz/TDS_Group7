@@ -1,25 +1,19 @@
-#!/bin/bash
-#PBS -N preprocessing
-#PBS -l walltime=02:00:00
-#PBS -l select=1:ncpus=2:mem=32gb
-#PBS -o logs/preprocessing.stdout
-#PBS -e logs/preprocessing.stderr
-#PBS -j oe
+#PBS -l walltime=4:00:00
+#PBS -l select=1:ncpus=1:mem=50gb
+#PBS -N extraction
 
-# --- Move to submission directory --------------------------------------------
-cd /rds/general/project/hda_25-26/live/TDS/TDS_Group7/extraction_and_recoding/scripts
+# Go to the scripts folder inside the directory where qsub was run
+cd "$PBS_O_WORKDIR/scripts" || exit 1
 
-# --- Create logs directory if it doesn't exist --------------------------------
-mkdir -p logs
+# set log directory
+console_dir=../logs
+mkdir -p "$console_dir"
 
-eval "$(~/miniforge3/bin/conda shell.bash hook)"
-source activate r413
+eval "$(~/anaconda3/bin/conda shell.bash hook)" || exit 1
 
-echo "============================="
-echo "Job:       $PBS_JOBID"
-echo "Node:      $(hostname)"
-echo "Started:   $(date)"
-echo "Directory: $(pwd)"
-echo "============================="
+conda activate r413 || exit 1
 
-Rscript 6.5-releveling.R
+ukb_path=/rds/general/project/hda_25-26/live/TDS/General/Data/tabular.tsv
+
+# Run the R script and save console output to logs
+Rscript 6.5-releveling.R > "${console_dir}/${PBS_JOBNAME}_${PBS_JOBID}.out" 2>&1

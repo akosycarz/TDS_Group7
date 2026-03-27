@@ -2,7 +2,7 @@
 rm(list = ls())
 
 # load data
-mydata <- readRDS("outputs/ukb_recoded_by_script.rds")
+mydata <- readRDS("../outputs/ukb_recoded_by_script.rds")
 
 
 #### 1. Collapse sys_bp
@@ -154,7 +154,7 @@ library(tibble)
 
 mydata$id <- as.integer(rownames(mydata))
 
-cvd_path <- "/rds/general/project/hda_25-26/live/TDS/General/Data/cvd_events.rds"
+cvd_path <- "../cvd_events.rds"
 cvd <- readRDS(cvd_path)
 
 cvd_clean <- cvd %>%
@@ -177,4 +177,4 @@ merged_data <- mydata %>%
   select(-any_of(c("src_l10_first.0.0", "date_of_death.0.0.1"))) %>%
   column_to_rownames("id")   # <-- puts id back on the LHS
 
-saveRDS(merged_data, file = "outputs/ukb_collapsed.rds")
+saveRDS(merged_data, file = "../outputs/ukb_collapsed.rds")

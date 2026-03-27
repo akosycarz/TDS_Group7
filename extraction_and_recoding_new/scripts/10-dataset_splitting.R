@@ -8,7 +8,7 @@ library(dplyr)
 # ----------------
 # 1. Load
 # ----------------
-df <- readRDS("/rds/general/project/hda_25-26/live/TDS/TDS_Group7/extraction_and_recoding/outputs/ukb_cleaned.rds")
+df <- readRDS("../outputs/ukb_cleaned.rds")
 
 # ----------------
 # 2. Binary outcome for stratification
@@ -89,7 +89,7 @@ df_test$y      <- NULL
 # ----------------
 # 7. Save
 # ----------------
-out <- "/rds/general/project/hda_25-26/live/TDS/TDS_Group7/extraction_and_recoding/outputs"
+out <- "../outputs"
 
 saveRDS(df_selection, file.path(out, "ukb_selection_60_raw.rds"))
 saveRDS(df_refit,     file.path(out, "ukb_refit_20_raw.rds"))

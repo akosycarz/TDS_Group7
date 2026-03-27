@@ -1,7 +1,7 @@
 library(dplyr)
 library(tibble)
 
-df <- readRDS("outputs/ukb_collapsed3.rds")
+df <- readRDS("../outputs/ukb_collapsed4.rds")
 
 # bring rownames (participant ids) into a column for counting
 df <- df %>% rownames_to_column(var = "participant_id")
@@ -104,7 +104,7 @@ exclude_vars <- c(
 NA_not_missing <- data.frame(
   variable = exclude_vars
 )
-saveRDS(NA_not_missing, "outputs/NA_not_missing.rds")
+saveRDS(NA_not_missing, "../outputs/NA_not_missing.rds")
 
 # column missingness 
 missing_summary_column <- data.frame(
@@ -171,5 +171,5 @@ colnames(df_new) <- gsub("\\.0\\.0$", "", colnames(df_new))
 
 names(df_new) <- gsub("\\.", "_", names(df_new))
 
-saveRDS(df_new, "/rds/general/user/yz6125/projects/hda_25-26/live/TDS/TDS_Group7/extraction_and_recoding/outputs/ukb_cleaned.rds")
+saveRDS(df_new, "../outputs/ukb_cleaned.rds")
 

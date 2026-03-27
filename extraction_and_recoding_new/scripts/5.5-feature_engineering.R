@@ -9,7 +9,7 @@ rm(list = ls())
 # ------------------------------------------------------------
 # 0) Load input data
 # ------------------------------------------------------------
-df <- readRDS("outputs/ukb_collapsed.rds")
+df <- readRDS("../outputs/ukb_collapsed.rds")
 
 # ============================================================
 # 1) TOTAL SEDENTARY HOURS
@@ -368,4 +368,4 @@ if (all(c("alcohol_drinker_status.0.0", "alcohol_frequency.0.0") %in% names(df))
 # ------------------------------------------------------------
 # Save output
 # ------------------------------------------------------------
-saveRDS(df, file = "outputs/ukb_collapsed2.rds")
+saveRDS(df, file = "../outputs/ukb_collapsed2.rds")

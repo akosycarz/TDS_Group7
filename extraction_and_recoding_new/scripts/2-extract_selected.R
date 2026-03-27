@@ -6,7 +6,7 @@ library(openxlsx)
 
 # Cleaning previous outputs
 dir.create("../outputs", showWarnings = FALSE)
-if (length(list.files("outputs")) > 0) {
+if (length(list.files("../outputs")) > 0) {
   system("rm ../outputs/*")
 }
 

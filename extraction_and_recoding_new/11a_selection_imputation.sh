@@ -2,14 +2,49 @@
 #PBS -l walltime=12:00:00
 #PBS -l select=1:ncpus=128:ompthreads=128:mem=192gb
 #PBS -N impute_selection
-#PBS -o /rds/general/project/hda_25-26/live/TDS/TDS_Group7/extraction_and_recoding/logs_ms4925
-#PBS -e /rds/general/project/hda_25-26/live/TDS/TDS_Group7/extraction_and_recoding/logs_ms4925
+#PBS -J 1-3
 
-cd $PBS_O_WORKDIR
-eval "$(~/anaconda3/bin/conda shell.bash hook)"
-source activate r45
+set -euxo pipefail
 
-console_dir=/rds/general/project/hda_25-26/live/TDS/TDS_Group7/extraction_and_recoding/logs_ms4925
+echo "===== JOB START ====="
+date
+echo "PBS_JOBID=${PBS_JOBID:-unset}"
+echo "PBS_ARRAY_INDEX=${PBS_ARRAY_INDEX:-unset}"
+echo "PBS_O_WORKDIR=${PBS_O_WORKDIR:-unset}"
+echo "HOSTNAME=$(hostname)"
+echo "PWD before cd: $(pwd)"
 
-R CMD BATCH scripts/11a_impute_selection.R \
-${console_dir}/impute_selection_${PBS_JOBID}.Rout
+cd "${PBS_O_WORKDIR}/scripts"
+
+echo "PWD after cd: $(pwd)"
+echo "Contents of scripts dir:"
+ls -lah
+
+echo "Checking R script exists:"
+ls -l 11a_impute_selection.R
+
+echo "Checking conda executable:"
+ls -l "${HOME}/anaconda3/bin/conda"
+
+echo "Initializing conda..."
+eval "$(${HOME}/anaconda3/bin/conda shell.bash hook)"
+
+echo "Activating env..."
+conda activate r45
+
+echo "Which R:"
+which R
+R --version
+
+echo "Which Rscript:"
+which Rscript
+Rscript --version
+
+echo "Running test R command..."
+Rscript -e 'cat("Hello from R\n")'
+
+echo "Running actual script..."
+Rscript 11a_impute_selection.R "${PBS_ARRAY_INDEX}"
+
+echo "===== JOB END ====="
+date

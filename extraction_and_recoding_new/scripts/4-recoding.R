@@ -1,7 +1,7 @@
 library(dplyr)
 
-df    <- readRDS("outputs/ukb_recoded_changed.rds")
-annot <- readRDS("outputs/annot.rds")
+df    <- readRDS("../outputs/ukb_recoded_changed.rds")
+annot <- readRDS("../outputs/annot.rds")
 
 annot_small <- annot %>% select(Coding, CodingName)
 
@@ -331,4 +331,4 @@ for (col in cols_100695) {
 }
 
 
-saveRDS(df, file = "outputs/ukb_recoded_by_script.rds")
+saveRDS(df, file = "../outputs/ukb_recoded_by_script.rds")

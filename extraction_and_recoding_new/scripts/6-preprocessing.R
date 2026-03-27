@@ -15,7 +15,7 @@ rm(list = ls())
 # ------------------------------------------------------------
 # 0) Load input data
 # ------------------------------------------------------------
-df <- readRDS("outputs/ukb_collapsed2.rds")
+df <- readRDS("../outputs/ukb_collapsed2.rds")
 
 # ============================================================
 # 1) BASIC CLEANING / SENTINEL HANDLING
@@ -413,4 +413,4 @@ df <- df %>%
 # ============================================================
 # 9) Save output
 # ============================================================
-saveRDS(df, "outputs/ukb_collapsed3.rds")
+saveRDS(df, "../outputs/ukb_collapsed3.rds")
