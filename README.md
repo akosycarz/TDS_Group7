@@ -5,9 +5,7 @@
 
 ## Overview
 
-This pipeline processes UK Biobank (UKB) data to predict incident cardiovascular disease (CVD) events. It covers the full analytical workflow: from raw data extraction through to variable selection, imputation, and predictive modelling.
-
-The pipeline is split across **R scripts** (data processing, imputation, variable selection, logistic regression) and **Python scripts** (XGBoost and sklearn logistic regression models).
+This pipeline processes UK Biobank (UKB) data to predict incident cardiovascular disease (CVD) events. It covers the full analytical workflow: from raw data extraction through to variable selection, imputation.
 
 ---
 
@@ -33,17 +31,6 @@ scripts/
 ├── 11a_impute_selection.R             # Impute 60% selection split (fits model)
 ├── 11b_impute_refit.R                 # Impute 20% refit split (fits model)
 └── 11c_impute_test.R                  # Apply refit model to 20% test split
-
-├── 11d_relevel_imputed_splits_adjusted_ref.R    # Uniform factor releveling across all splits
-├── 11d_relevel_imputed_splits_adjusted_ref-copy.R  # Working copy of releveling script
-├── 12-lasso_stability_selection_model1.R        # Stability selection with LASSO (alpha = 1)
-├── 13-elastic_net_stability_selection_model1.R  # Stability selection with tuned Elastic Net
-├── 14-model1_refit_logistic.R                   # Unpenalised logistic regression on refit set
-├── 15-python-boost.py                           # XGBoost with Optuna tuning + SHAP explanations
-├── 16-logistic-python.py                        # Sklearn logistic regression (confounders baseline)
-
-```
-
 ---
 
 ## How to Run
@@ -67,13 +54,6 @@ scripts/
 | 12 | `11a_selection_imputation.sh` |
 | 13 | `11b_refit_imputation.sh` |
 | 14 | `11c_test_imputation.sh` |
-
-| 14 | `11d_relevel_imputed_splits_adjusted_ref.R` 
-| 15 | `12-lasso_stability_selection_model1.R` 
-| 16 | `13-elastic_net_stability_selection_model1.R` 
-| 17 | `14-model1_refit_logistic.R` 
-| 18 | `15-python-boost.py` 
-| 19 | `16-logistic-python.py` 
 
 
 ## Pipeline Stages
@@ -140,6 +120,15 @@ Saves `outputs/ukb_collapsed3.rds`
 
 ---
 
+### Releveling (`6.5-releveling.R`)
+- Loads `outputs/ukb_collapsed3.rds`
+- Sets consistent reference levels for selected categorical variables
+- Relevels factors before downstream modelling
+- Uses predefined baseline categories for demographic, lifestyle, and health variables
+- Reports missing variables or unavailable reference levels during processing
+
+Saves `outputs/ukb_collapsed4.rds`
+
 ###  Cleaning & Exclusions (`7-cleaning.R`)
 Applies three sequential exclusion criteria:
 
@@ -165,7 +154,7 @@ Runs `miceRanger` (random-forest multiple imputation) on the full cleaned datase
 - `m = 1` imputed dataset, `maxiter = 5`, `num.trees = 100`
 - Excluded from imputation engine: demographics, dates, health states, outcome
 
-Saves `outputs/ukb_final_ruben_imputed_500k.rds`
+Saves `outputs/ukb_final_imputed.rds`
 
 ---
 
@@ -208,80 +197,6 @@ Each split is imputed independently using the same predictor matrix logic as Sta
 
 Saves: `ukb_selection_60_imputed.rds`, `ukb_refit_20_imputed.rds`, `ukb_test_20_imputed.rds`
 
----
-
-### Factor Releveling (`11d_relevel_imputed_splits_adjusted_ref.R`)
-Applies uniform reference group assignment across all three imputed splits:
-- Sets interpretable reference categories (e.g. `sex = "Female"`, `bmi = "Healthy weight"`, `smoking_status = "Never"`)
-- Sets `"No"` as reference for all `_yn` binary variables
-- Collapses employment and qualification categories to 4-level groupings
-
-Saves: `relevel_ukb_selection_60_imputed.rds`, etc.
-
----
-
-### Variable Selection: LASSO (`12-lasso_stability_selection_model1.R`)
-Stability selection using the `sharp` package with LASSO (`alpha = 1`):
-- `K = 100` subsamples, `tau = 0.5`
-- Confounders (age, sex, ethnicity) are **unpenalised**
-- Calibration via `Argmax()` to select optimal `(lambda, pi)` pair
-
-Outputs:
-- `model1_lasso_stable_variables.csv`
-- `model1_lasso_stable_exposures.csv`
-- `model1_lasso_calibration_plot.pdf`
-- `model1_lasso_selection_proportions.pdf`
-
----
-
-### Variable Selection: Elastic Net (`13-elastic_net_stability_selection_model1.R`)
-Same stability selection framework but with **tuned alpha**:
-- `alpha` optimised via `cv.glmnet` with 10-fold CV over `[0, 1]`
-- Otherwise identical structure to LASSO script
-
-Outputs:
-- `model1_stable_variables.csv`
-- `model1_stable_exposures.csv`
-- `model1_calibration_plot.pdf`
-- `model1_selection_proportions.pdf`
-
----
-
-### Logistic Regression Refit (`14-model1_refit_logistic.R`)
-Fits **unpenalised logistic regression** on the 20% refit set using variables selected in Stage 15/16:
-
-| Model | Predictors |
-|---|---|
-| RQ1 (exposures only) | Confounders + stable exposures |
-| Mediation Path B | Confounders + stable exposures + stable biomarkers |
-
-Outputs:
-- `model1_refit_ORs_rq1_exposures.csv`, 
-- `model1_refit_ORs_mediation_pathB.csv`
-
----
-
-### Stage 18 — XGBoost (`15-python-boost.py`)
-Gradient boosted tree model with:
-- **Optuna** hyperparameter tuning (`N_TRIALS = 50`, 5-fold CV)
-- **SHAP** feature importance (top 20 features)
-- Youden's J threshold optimisation
-- Full PDF report with ROC, PR curve, confusion matrices, SHAP plots
-
-Outputs `XGBoost_results/`
-
----
-
-### Stage 19 — Logistic Regression Baseline (`16-logistic-python.py`)
-Sklearn logistic regression using **confounders only** (age, sex, ethnicity) as a performance baseline:
-- 5-fold cross-validated AUC
-- Youden's J threshold
-- ROC, Precision-Recall, F1 vs Threshold plots
-- Full PDF report
-
-Outputs  `LR_confounder_results/`
-
----
 
 ## Key File Dependencies
 
@@ -302,9 +217,7 @@ Raw UKB .tab
                                                                             ├── 11a  ──► ukb_selection_60_imputed.rds
                                                                             ├── 11b  ──► ukb_refit_20_imputed.rds
                                                                             ├── 11c  ──► ukb_test_20_imputed.rds
-                                                                            └── 11d  ──► relevel_*.rds
-                                                                                    ├── 12/13  ──► stable_variables.csv
-                                                                                    └── 14  ──► ORs.csv
+                                                                        
 ```
 
 ---
@@ -334,12 +247,6 @@ library(table1)
 library(labelled)
 library(htmltools)
 library(webshot2)  # or webshot + PhantomJS fallback
-```
-
-## Python Package Requirements
-
-```bash
-pip install numpy pandas pyreadr matplotlib scikit-learn xgboost shap optuna
 ```
 
 ---
