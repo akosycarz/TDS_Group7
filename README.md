@@ -1,4 +1,4 @@
-# TDS Group 7 — CVD Prediction Pipeline
+# TDS Group 7 — CVD Prediction Pipeline (up to imputation) 
 ## UK Biobank Analysis: Cardiovascular Disease Event Prediction
 
 ---
