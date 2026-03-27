@@ -18,7 +18,6 @@ docs/
 outputs/
 parameters/
 scripts/
-scripts/
 ├── 1-make_data_dict.R                 # Build data dictionary from raw UKB basket
 ├── 2-extract_selected.R               # Extract selected variables & instance
 ├── 3-recode_variables_change.R        # Recode categorical/continuous variables
@@ -29,7 +28,6 @@ scripts/
 ├── 6.5-releveling.R                   # Factor releveling before modelling
 ├── 7-cleaning.R                       # Exclusion criteria + missingness filtering → ukb_cleaned.rds
 ├── 8-imputation_full_dataset.R        # miceRanger imputation on full dataset
-├── 9-table1.R                         # Table 1 (before & after imputation)
 ├── 10-dataset_splitting.R             # Stratified 60/20/20 train/refit/test split
 ├── 11a_impute_selection.R             # Impute 60% selection split (fits model)
 ├── 11b_impute_refit.R                 # Impute 20% refit split (fits model)
