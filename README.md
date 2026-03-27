@@ -28,6 +28,7 @@ scripts/
 ├── 6.5-releveling.R                   # Factor releveling before modelling
 ├── 7-cleaning.R                       # Exclusion criteria + missingness filtering → ukb_cleaned.rds
 ├── 8-imputation_full_dataset.R        # miceRanger imputation on full dataset
+├── 9-table1.R                         # Generating table1 for exploratory analysis
 ├── 10-dataset_splitting.R             # Stratified 60/20/20 train/refit/test split
 ├── 11a_impute_selection.R             # Impute 60% selection split (fits model)
 ├── 11b_impute_refit.R                 # Impute 20% refit split (fits model)
@@ -61,10 +62,11 @@ scripts/
 | 7 | `6.5-releveling.sh` |
 | 8 | `7-cleaning.sh` |
 | 9 | `8-imputation_full_dataset.sh` |
-| 10 | `10-imputation_split_dataset.sh` |
-| 11 | `11a_selection_imputation.sh` |
-| 12 | `11b_refit_imputation.sh` |
-| 13 | `11c_test_imputation.sh` |
+| 10 | `9-table1.R` |
+| 11 | `10-imputation_split_dataset.sh` |
+| 12 | `11a_selection_imputation.sh` |
+| 13 | `11b_refit_imputation.sh` |
+| 14 | `11c_test_imputation.sh` |
 
 | 14 | `11d_relevel_imputed_splits_adjusted_ref.R` 
 | 15 | `12-lasso_stability_selection_model1.R` 
