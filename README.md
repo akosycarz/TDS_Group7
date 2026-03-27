@@ -130,6 +130,8 @@ Saves `outputs/ukb_collapsed3.rds`
 
 Saves `outputs/ukb_collapsed4.rds`
 
+---
+
 ###  Cleaning & Exclusions (`7-cleaning.R`)
 Applies three sequential exclusion criteria:
 
