@@ -47,7 +47,7 @@ scripts/
 
 ## How to Run
 
-### Step-by-step execution order
+### Step-by-step execution order (up to imputation)
 
 
 | Step | Script |
