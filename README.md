@@ -68,7 +68,7 @@ Each .sh file submits the corresponding `.R` or `.py` script to the HPC schedule
 
 | Stage | Script | Input Files | Output Files |
 |---|---|---|---|
-| 1 | `2-extract_selected.R` | `selection.xlsx`<br>`Codings.csv`<br>`UKB raw file` | `annot.rds`<br>`ukb_extracted.rds`<br>`codes_<ID>.txt`<br>`codes_template_continuous.txt` |
+| 1 | `2-extract_selected.R` | `selection.xlsx`<br>`Codings.csv`<br>`UKB raw file`<br>`tabular.tsv` | `annot.rds`<br>`ukb_extracted.rds`<br>`codes_<ID>.txt`<br>`codes_template_continuous.txt` |
 | 2 | `3-recode_variables_change.R` | `annot.rds`<br>`ukb_extracted.rds`<br>`codes_<ID>.txt`<br>`codes_field*` | `ukb_recoded_changed.rds`<br>`parameters_changed.xlsx` |
 | 3 | `4-recoding.R` | `ukb_recoded_changed.rds`<br>`annot.rds` | `ukb_recoded_by_script.rds` |
 | 4 | `5-collapsing.R` | `ukb_recoded_changed.rds` | `ukb_collapsed.rds` |
