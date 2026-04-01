@@ -1,27 +1,21 @@
 # TDS Group 7 — CVD Prediction 
-## UK Biobank Analysis: Cardiovascular Disease Event Prediction
 
----
+## UK Biobank Analysis: Cardiovascular Disease Event Prediction
 
 ## Overview
 
 This pipeline processes UK Biobank (UKB) data to investigate incident cardiovascular disease (CVD), covering the full workflow from data extraction, recoding, feature engineering, and preprocessing through imputation, variable selection, multi-model prediction (logistic regression, XGBoost, and neural networks), mediation analysis, and model evaluation.
-
----
 
 ## How to Run
 
 Run the shell scripts below in order from the project root `extraction_and_recoding_new/`.
 Each .sh file submits the corresponding `.R` or `.py` script to the HPC scheduler.
 
----
-
 ## Input data paths
+
 `2-extract_selected.sh` contains the path to the synthetic UK Biobank dataset used by its corresponding script.
 
 `5-collapsing.sh contains` the path to the synthetic CVD events outcome dataset used by its corresponding script.
-
----
 
 ## Step-by-step execution order
 
@@ -62,8 +56,6 @@ Each .sh file submits the corresponding `.R` or `.py` script to the HPC schedule
 | 33 | `28-PCA.sh` | `28-PCA.R` |
 | 34 | `29-xgboost-analysis.sh` | `29-xgboost-analysis.R` |
 
----
-
 ## Pipeline Summary
 
 | Stage | Script | Input Files | Output Files |
@@ -103,8 +95,6 @@ Each .sh file submits the corresponding `.R` or `.py` script to the HPC schedule
 | 33 | `28-PCA.R` | `ukb_selection_60_imputed.rds` | `PCA_results/pca_case_control.png`<br>`PCA_results/pca_sex.png`<br>`PCA_results/pca_age.png`<br>`PCA_results/pca_ethnicity.png`<br>`PCA_results/scree_plot.png`<br>`PCA_results/cumulative_variance.png`<br>`PCA_results/loadings_plot.png`<br>`PCA_results/pca_variance_explained.csv`<br>`PCA_results/pca_loadings_all.csv`<br>`PCA_results/pca_scores_first5PCs.csv` |
 | 34 | `29-xgboost-analysis.R` | `model1_lasso_stability_summary.csv`<br>`model1_stability_summary.csv`<br>`XGBoost_results/shap_importance.csv`<br>`ukb_refit_20_imputed.rds`<br>`ukb_test_20_imputed.rds`<br>`7.6-plot_functions.R` | `xgboost_shap_refit_forest.pdf`<br>`xgboost_shap_subsample_summary.csv`<br>`xgboost_shap_incremental_auc_summary.csv`<br>`xgboost_shap_incremental_auc.png` |
 
----
-
 ## Pipeline Dependency Overview
 
 ```
@@ -143,20 +133,16 @@ Raw UKB .tab
    ├── Predictive Modelling
    │     ├── 14-model1_refit_logistic.R
    │     ├── 16-python_xgboost_602020.py
-   │     └── 17-neural_network.py
+   │     ├── 17-neural_network.py
+   │     ├── PCA (28-PCA.R)
+   │     ├── Forest plots (21–24)
+   │     └── ROC comparison (27)
    │
-   ├── Mediation Analysis
-   │     └── 18-final_analysis_mediation.R
-   │
-   └── Visualisation & Evaluation
-         ├── PCA (28-PCA.R)
-         ├── Forest plots (21–24)
-         ├── ROC comparison (27)
+   └── Mediation Analysis
+         ├── 18-final_analysis_mediation.R
          └── Mediation figures (19–20)
                                                                       
 ```
-
----
 
 ## Pipeline Documentation
 
@@ -753,4 +739,3 @@ library(webshot2)  # or webshot + PhantomJS fallback
 ```bash
 pip install numpy pandas pyreadr matplotlib scikit-learn xgboost shap optuna
 ```
----
