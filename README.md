@@ -19,7 +19,7 @@ Each .sh file submits the corresponding `.R` or `.py` script to the HPC schedule
 
 `5-collapsing.sh contains` the path to the synthetic CVD events outcome dataset used by its corresponding script.
 
-### Step-by-step execution order
+## Step-by-step execution order
 
 | Step | Shell script | Underlying script |
 |------|--------------|------------------|
