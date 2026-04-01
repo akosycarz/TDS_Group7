@@ -237,7 +237,7 @@ Inputs:
 Outputs:
 - `ukb_collapsed3.rds`
 
-- Converts sentinel values (e.g. `-999909999`) to `NA`
+- Converts sentinel values (e.g. `-999909999` to `NA`)
 - Range checks (e.g. `sys_bp > 250 → NA`)
 - Sets negative biochemistry values to `NA`
 - Bands continuous variables into categories (BMI, body fat %, sleep duration, water intake, etc.)
