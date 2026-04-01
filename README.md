@@ -11,8 +11,8 @@ This pipeline processes UK Biobank (UKB) data to investigate incident cardiovasc
 
 ## How to Run
 
-Run the shell scripts below in order from the project root (extraction_and_recoding_new/).
-Each .sh file submits the corresponding .R or .py script to the HPC scheduler.
+Run the shell scripts below in order from the project root `extraction_and_recoding_new/`.
+Each .sh file submits the corresponding `.R` or `.py` script to the HPC scheduler.
 
 ## Input data paths
 `2-extract_selected.sh` contains the path to the synthetic UK Biobank dataset used by its corresponding script.
