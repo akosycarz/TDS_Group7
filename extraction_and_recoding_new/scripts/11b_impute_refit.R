@@ -12,7 +12,7 @@ suppressPackageStartupMessages({
 
 base        <- "../outputs"
 input_path  <- file.path(base, "ukb_refit_20_raw.rds")
-output_path <- file.path(base, "relevel_ukb_refit_20_imputed_copy.rds")
+output_path <- file.path(base, "ukb_refit_20_imputed.rds")
 model_path  <- file.path(base, "ukb_refit_20_impute_model.rds")
 
 message("Input:  ", input_path)

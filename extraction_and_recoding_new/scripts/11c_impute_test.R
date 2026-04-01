@@ -1,4 +1,3 @@
-# 28c_impute_test.R
 # Applies the refit imputation model to the test split.
 # The test split never fits its own model — it must remain completely unseen.
 # The refit model (ukb_refit_20_impute_model.rds) is used here.
@@ -12,7 +11,7 @@ suppressPackageStartupMessages({
 
 base        <- "../outputs"
 input_path  <- file.path(base, "ukb_test_20_raw.rds")
-output_path <- file.path(base, "relevel_ukb_test_20_imputed_copy.rds")
+output_path <- file.path(base, "ukb_test_20_imputed.rds")
 model_path  <- file.path(base, "ukb_refit_20_impute_model.rds")  # refit model, not selection
 
 if (!file.exists(model_path)) stop("Refit imputation model not found at: ", model_path)
@@ -98,8 +97,12 @@ never_impute_df     <- df[, never_impute_in_df, drop = FALSE]
 never_impute_df$eid <- eid
 
 data_final <- imputed_df %>%
-  select(-any_of(setdiff(never_impute, "eid"))) %>%
-  left_join(never_impute_df, by = "eid") %>%
+  mutate(eid = eid) %>%
+  select(-any_of(never_impute_in_df)) %>%
+  left_join(
+    never_impute_df,
+    by = "eid"
+  ) %>%
   mutate(dob = as.Date(dob, origin = "1970-01-01"))
 
 rownames(data_final) <- data_final$eid

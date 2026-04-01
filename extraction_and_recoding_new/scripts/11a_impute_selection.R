@@ -1,4 +1,4 @@
-# 28a_impute_selection.R
+
 # Fits the imputation model on the selection split (60%) and saves it
 # for use on the refit and test splits
 
@@ -12,7 +12,7 @@ suppressPackageStartupMessages({
 # Define I/O paths
 base         <- "../outputs"
 input_path   <- file.path(base, "ukb_selection_60_raw.rds")
-output_path  <- file.path(base, "relevel_ukb_selection_60_imputed_copy.rds")
+output_path  <- file.path(base, "ukb_selection_60_imputed.rds")
 model_path   <- file.path(base, "ukb_selection_60_impute_model.rds")
 
 message("Input:  ", input_path)

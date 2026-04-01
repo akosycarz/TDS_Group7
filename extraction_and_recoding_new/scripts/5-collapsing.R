@@ -154,7 +154,9 @@ library(tibble)
 
 mydata$id <- as.integer(rownames(mydata))
 
-cvd_path <- "../cvd_events.rds"
+args <- commandArgs(trailingOnly = TRUE)
+cvd_path <- args[1]
+
 cvd <- readRDS(cvd_path)
 
 cvd_clean <- cvd %>%

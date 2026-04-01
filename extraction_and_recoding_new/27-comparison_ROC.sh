@@ -15,4 +15,4 @@ conda activate r413 || exit 1
 
 
 # Run the R script and save console output to logs
-Rscript 6.5-releveling.R > "${console_dir}/${PBS_JOBNAME}_${PBS_JOBID}.out" 2>&1
+Rscript 27-comparison_ROC.R > "${console_dir}/${PBS_JOBNAME}_${PBS_JOBID}.out" 2>&1

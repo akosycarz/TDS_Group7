@@ -1,5 +1,5 @@
 # =========================================================
-# 0X_relevel_imputed_splits.R
+# relevel_imputed_splits.R
 # Purpose: Apply chosen reference levels to ukb_collapsed3.rds
 #          and save as ukb_collapsed4.rds
 # =========================================================

@@ -55,7 +55,7 @@ dx_timing <- grep("(^dis|^date_of_|^mh_|^med_)", names(df), value = TRUE)
 health_states <- c("dis_diabetes_doc_yn", "dis_cancer_doc_yn", "mh_BPD_MD", 
                    "mh_neuroticism", "mh_loneliness", "mh_social_support_confide", "dis_cvd_doc_yn")
 other_vars <- c("sur_major_surgery", "attending_assessment_date", "outcome", 
-                "pregnant_yn", "age_full_edu")
+                "pregnant_yn", "age_full_edu","n_treatments")
 
 all_excluded <- unique(c(core_demo, dx_timing, health_states, other_vars))
 
