@@ -731,7 +731,7 @@ library(survival)
 library(table1)
 library(labelled)
 library(htmltools)
-library(webshot2)  # or webshot + PhantomJS fallback
+library(webshot2) 
 ```
 
 ## Python Package Requirements
