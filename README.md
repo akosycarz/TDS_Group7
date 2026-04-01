@@ -162,9 +162,9 @@ Raw UKB .tab
 
 ###  Variable Extraction (`2-extract_selected.R`)
 Inputs: 
--`selection.xlsx`
--`Codings.csv`
--`tabular.tsv`(path specified in the corresponding .sh script)
+- `selection.xlsx`
+- `Codings.csv`
+- `tabular.tsv`(path specified in the corresponding .sh script)
 
 Outputs:
 - `annot.rds`
