@@ -11,9 +11,9 @@ mkdir -p "$console_dir"
 
 eval "$(~/anaconda3/bin/conda shell.bash hook)" || exit 1
 
-conda activate r413 || exit 1
+conda activate phd_r || exit 1
 
-cvd_path=/rds/general/project/hda_25-26/live/TDS/TDS_Group7/extraction_and_recoding_new/cvd_events.rds
+cvd_path=/rds/general/project/hda_25-26/live/TDS/fg520/TDS_Group7/extraction_and_recoding_new/cvd_events_real.rds
 
 # Run the R script and save console output to logs
 Rscript 5-collapsing.R "$cvd_path" \

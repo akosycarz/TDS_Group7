@@ -11,11 +11,10 @@ mkdir -p "$console_dir"
 
 eval "$(~/anaconda3/bin/conda shell.bash hook)" || exit 1
 
-conda activate r413 || exit 1
+conda activate phd_r || exit 1
 
-ukb_path=/rds/general/project/hda_25-26/live/TDS/General/Data/tabular.tsv
+ukb_path=/rds/general/project/chadeau_ukbb_folder/live/data/project_data/UKB_677583/ukb677583.csv
 
 # Run the R script and save console output to logs
 Rscript 2-extract_selected.R "$ukb_path" \
 > "${console_dir}/${PBS_JOBNAME}_${PBS_JOBID}.out" 2>&1
-

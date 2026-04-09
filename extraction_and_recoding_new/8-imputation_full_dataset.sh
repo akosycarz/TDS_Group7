@@ -1,4 +1,3 @@
-#!/bin/bash
 #PBS -l walltime=12:00:00
 #PBS -l select=1:ncpus=128:ompthreads=128:mem=192gb
 #PBS -N impute_split
@@ -30,7 +29,7 @@ echo "Initializing conda..."
 eval "$(${HOME}/anaconda3/bin/conda shell.bash hook)"
 
 echo "Activating env..."
-conda activate r45
+conda activate phd_r
 
 echo "Which R:"
 which R

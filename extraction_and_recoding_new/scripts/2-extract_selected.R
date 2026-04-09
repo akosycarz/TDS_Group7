@@ -6,7 +6,7 @@ library(openxlsx)
 
 # Cleaning previous outputs
 dir.create("../outputs", showWarnings = FALSE)
-if (length(list.files("../outputs")) > 0) {
+if (length(list.files("outputs")) > 0) {
   system("rm ../outputs/*")
 }
 
@@ -44,7 +44,7 @@ for (i in 1:nrow(choices)) {
     ids <- c(ids, grep(paste0("^", choices$FieldID[i], "-", instance_vect[j], "\\."), ukb_main_columns))
   }
 }
-mydata <- fread(ukb_path, data.table = FALSE, sep = "\t", header = T, select = ids)
+mydata <- fread(ukb_path, data.table = FALSE, select = ids)
 
 # Re-formatting the data with eids as row names
 rownames(mydata) <- mydata$eid
@@ -69,7 +69,7 @@ for (i in 1:length(coding_ids)) {
   tmp <- cbind(tmp, tmp)
   colnames(tmp) <- c("OriginalValue", "OriginalMeaning", "RecodedValue", "RecodedMeaning")
   write.table(tmp, paste0("../parameters/codings/codes_", codeID, ".txt"),
-    row.names = FALSE, col.names = TRUE
+              row.names = FALSE, col.names = TRUE
   )
   utils::setTxtProgressBar(pb, i / length(coding_ids))
 }
@@ -78,7 +78,7 @@ cat("\n")
 # Preparing template for recoding of continuous variables
 tmp <- data.frame(MinValue = NA, MaxValue = NA, RecodedValue = NA, RecodedMeaning = NA)
 write.table(tmp, paste0("../parameters/codings/codes_template_continuous.txt"),
-  row.names = FALSE, col.names = TRUE
+            row.names = FALSE, col.names = TRUE
 )
 
 # Create figure names. If a manual figure name is not supplied, supply 'Field' as figure name

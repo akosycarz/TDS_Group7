@@ -11,8 +11,8 @@ mkdir -p "$console_dir"
 
 eval "$(~/anaconda3/bin/conda shell.bash hook)" || exit 1
 
-conda activate r413 || exit 1
+conda activate phd_r || exit 1
 
 
 # Run the R script and save console output to logs
-Rscript 3-recode_variables_change.R > "${console_dir}/${PBS_JOBNAME}_${PBS_JOBID}.out" 2>&1
+Rscript 3-recode_variables.R > "${console_dir}/${PBS_JOBNAME}_${PBS_JOBID}.out" 2>&1

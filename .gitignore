@@ -16,6 +16,7 @@ Output/
 *.jpg
 *.csv
 *.tsv
+*.rds
 
 # --- HPC / Slurm logs ---
 slurm-*.out
@@ -23,6 +24,8 @@ slurm-*.err
 *.out
 *.err
 *.log
+*.o*
+*.e*
 
 # --- OS / editor ---
 .DS_Store
