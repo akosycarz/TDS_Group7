@@ -7,6 +7,6 @@
 cd /rds/general/project/hda_25-26/live/TDS/TDS_Group7/extraction_and_recoding_new/scripts
 
 eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
-conda activate r45
+conda activate phd_r
 
 Rscript 9-table1.R

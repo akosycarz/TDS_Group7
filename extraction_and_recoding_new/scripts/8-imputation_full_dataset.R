@@ -101,7 +101,7 @@ impute_obj <- miceRanger(
   returnModels = TRUE,
   data      = df_impute,
   m         = 1,
-  maxiter   = 5,
+  maxiter   = 1,
   vars      = pred_list,
   num.trees = 100,
   verbose   = TRUE

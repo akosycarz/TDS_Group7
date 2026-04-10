@@ -134,13 +134,13 @@ df <- df %>%
       TRUE ~ NA_character_
     ),
     
-    diet_coffee.0.0 = case_when(
-      diet_coffee.0.0 %in% refusal_responses ~ diet_coffee.0.0,
-      safe_num(diet_coffee.0.0) == 0 ~ "None",
-      safe_num(diet_coffee.0.0) >= 1 & safe_num(diet_coffee.0.0) <= 3 ~ "Moderate",
-      safe_num(diet_coffee.0.0) > 3 ~ "Heavy",
-      TRUE ~ NA_character_
-    ),
+    # diet_coffee.0.0 = case_when(
+    #   diet_coffee.0.0 %in% refusal_responses ~ diet_coffee.0.0,
+    #   safe_num(diet_coffee.0.0) == 0 ~ "None",
+    #   safe_num(diet_coffee.0.0) >= 1 & safe_num(diet_coffee.0.0) <= 3 ~ "Moderate",
+    #   safe_num(diet_coffee.0.0) > 3 ~ "Heavy",
+    #   TRUE ~ NA_character_
+    # ),
     
     diet_tea.0.0 = case_when(
       diet_tea.0.0 %in% refusal_responses ~ diet_tea.0.0,
@@ -151,12 +151,12 @@ df <- df %>%
       TRUE ~ NA_character_
     ),
     
-    MET_summed.0.0 = case_when(
-      MET_summed.0.0 < 600 ~ "Low",
-      MET_summed.0.0 >= 600 & MET_summed.0.0 <= 3000 ~ "Moderate",
-      MET_summed.0.0 > 3000 ~ "High",
-      TRUE ~ NA_character_
-    ),
+    # MET_summed.0.0 = case_when(
+    #   MET_summed.0.0 < 600 ~ "Low",
+    #   MET_summed.0.0 >= 600 & MET_summed.0.0 <= 3000 ~ "Moderate",
+    #   MET_summed.0.0 > 3000 ~ "High",
+    #   TRUE ~ NA_character_
+    # ),
     
     bmi.0.0 = case_when(
       bmi.0.0 < 15 ~ NA_character_,
@@ -167,18 +167,18 @@ df <- df %>%
       TRUE ~ NA_character_
     ),
     
-    `body_fat_pct.0.0` = case_when(
-      `body_fat_pct.0.0` < 5 ~ NA_character_,
-      sex.0.0 == "Male" & `body_fat_pct.0.0` < 13 ~ "Underweight",
-      sex.0.0 == "Male" & `body_fat_pct.0.0` >= 13 & `body_fat_pct.0.0` < 23 ~ "Normal weight",
-      sex.0.0 == "Male" & `body_fat_pct.0.0` >= 23 & `body_fat_pct.0.0` < 29 ~ "Overweight",
-      sex.0.0 == "Male" & `body_fat_pct.0.0` >= 29 ~ "Obesity",
-      sex.0.0 == "Female" & `body_fat_pct.0.0` < 26 ~ "Underweight",
-      sex.0.0 == "Female" & `body_fat_pct.0.0` >= 26 & `body_fat_pct.0.0` < 35 ~ "Normal weight",
-      sex.0.0 == "Female" & `body_fat_pct.0.0` >= 35 & `body_fat_pct.0.0` < 41 ~ "Overweight",
-      sex.0.0 == "Female" & `body_fat_pct.0.0` >= 41 ~ "Obesity",
-      TRUE ~ NA_character_
-    ),
+    # `body_fat_pct.0.0` = case_when(
+    #   `body_fat_pct.0.0` < 5 ~ NA_character_,
+    #   sex.0.0 == "Male" & `body_fat_pct.0.0` < 13 ~ "Underweight",
+    #   sex.0.0 == "Male" & `body_fat_pct.0.0` >= 13 & `body_fat_pct.0.0` < 23 ~ "Normal weight",
+    #   sex.0.0 == "Male" & `body_fat_pct.0.0` >= 23 & `body_fat_pct.0.0` < 29 ~ "Overweight",
+    #   sex.0.0 == "Male" & `body_fat_pct.0.0` >= 29 ~ "Obesity",
+    #   sex.0.0 == "Female" & `body_fat_pct.0.0` < 26 ~ "Underweight",
+    #   sex.0.0 == "Female" & `body_fat_pct.0.0` >= 26 & `body_fat_pct.0.0` < 35 ~ "Normal weight",
+    #   sex.0.0 == "Female" & `body_fat_pct.0.0` >= 35 & `body_fat_pct.0.0` < 41 ~ "Overweight",
+    #   sex.0.0 == "Female" & `body_fat_pct.0.0` >= 41 ~ "Obesity",
+    #   TRUE ~ NA_character_
+    # ),
     
     sleep_duration.0.0 = case_when(
       sleep_duration.0.0 %in% refusal_responses ~ sleep_duration.0.0,
