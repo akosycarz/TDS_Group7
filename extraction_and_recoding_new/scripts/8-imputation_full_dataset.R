@@ -15,6 +15,9 @@ message("Resource Check: Running on ", n_cores, " cores.")
 # --- DATA LOADING & CLEANING ---
 df <- readRDS("../outputs/ukb_cleaned.rds")
 
+# remove columns that contain all missing values
+df <- df[ , colSums(!is.na(df)) > 0]
+
 eid <- if ("eid" %in% names(df)) df$eid else rownames(df)
 if (is.null(eid) || length(eid) != nrow(df)) stop("Critical: EID mismatch.")
 rownames(df) <- NULL
