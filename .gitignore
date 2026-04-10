@@ -6,6 +6,7 @@
 *.Rproj
 *.e2*
 *.o2*
+*.rds
 
 # If you store secrets locally (recommended to ignore)
 .Renviron
