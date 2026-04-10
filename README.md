@@ -19,45 +19,47 @@ Each .sh file submits the corresponding .R or .py script to the HPC scheduler.
 5-collapsing.sh contains the path to the synthetic CVD events outcome dataset used by its corresponding script.
 
 ### Step-by-step execution order
+*** 100 iterations = 4.5h, used 1000 in the script
 
-| Step | Shell script | Underlying script |
+| Step | Shell script | Underlying script | Run Time |
 |------|--------------|------------------|
-| 1 | `2-extract_selected.sh` | `2-extract_selected.R` |
-| 2 | `3-recode_changed.sh` | `3-recode_variables_change.R` |
-| 3 | `4-recoding.sh` | `4-recoding.R` |
-| 4 | `5-collapsing.sh` | `5-collapsing.R` |
-| 5 | `5.5-feature_engineering.sh` | `5.5-feature_engineering.R` |
-| 6 | `6-preprocessing.sh` | `6-preprocessing.R` |
-| 7 | `6.5-releveling.sh` | `6.5-releveling.R` |
-| 8 | `7-cleaning.sh` | `7-cleaning.R` |
-| 9 | `7.5-plot_labels.sh` | `7.5-plot_labels.R` |
-| 10 | `7.6-plot_functions.sh` | `7.6-plot_functions.R` |
-| 11 | `8-imputation_full_dataset.sh` | `8-imputation_full_dataset.R` |
-| 12 | `9-table1.sh` | `9-table1.R` |
-| 13 | `10-imputation_split_dataset.sh` | `10-dataset_splitting.R` |
-| 14 | `11a_selection_imputation.sh` | `11a_impute_selection.R` |
-| 15 | `11b_refit_imputation.sh` | `11b_impute_refit.R` |
-| 16 | `11c_test_imputation.sh` | `11c_impute_test.R` |
-| 17 | `12-lasso_stability_selection_model1.sh` | `12-lasso_stability_selection_model1.R` |
-| 18 | `13-elastic_stability_selection_model1.sh` | `13-elastic_net_stability_selection_model1.R` |
-| 19 | `14-model1_refit_logistic.sh` | `14-model1_refit_logistic.R` |
-| 20 | `15-python-boost.sh` | `15-python-boost.py` |
-| 21 | `16-python_xgboost_602020.sh` | `16-python_xgboost_602020.py` |
-| 22 | `17-neural_network.sh` | `17-neural_network.py` |
-| 23 | `18-final_analysis_mediation.sh` | `18-final_analysis_mediation.R` |
-| 24 | `19-mediation_dag_figures.sh` | `19-mediation_dag_figures.R` |
-| 25 | `20-mediation_figures_heatmaps.sh` | `20-mediation_figures_heatmaps.R` |
-| 26 | `21-lasso_forest.sh` | `21-lasso_forest.R` |
-| 27 | `22-lasso_incremental.sh` | `22-lasso_incremental.R` |
-| 28 | `23-elastic_net_forest.sh` | `23-elastic_net_forest.R` |
-| 29 | `24-elastic_net_incremental.sh` | `24-elastic_net_incremental.R` |
-| 30 | `25-uni_analysis_combined.sh` | `25-uni_analysis_combined.R` |
-| 31 | `26-forest_plot_combined.sh` | `26-forest_plot_combined.R` |
-| 32 | `27-comparison_ROC.sh` | `27-comparison_ROC.R` |
-| 33 | `28-PCA.sh` | `28-PCA.R` |
-| 34 | `29-xgboost-analysis.sh` | `29-xgboost-analysis.R` |
+| 1 | `2-extract_selected.sh` | `2-extract_selected.R` (<1h)|
+| 2 | `3-recode_changed.sh` | `3-recode_variables_change.R` (30 min)|
+| 3 | `4-recoding.sh` | `4-recoding.R` (<10 min)|
+| 4 | `5-collapsing.sh` | `5-collapsing.R` (<10 min)|
+| 5 | `5.5-feature_engineering.sh` | `5.5-feature_engineering.R` (<10 min)|
+| 6 | `6-preprocessing.sh` | `6-preprocessing.R` (<10 min)|
+| 7 | `6.5-releveling.sh` | `6.5-releveling.R` (<10 min)|
+| 8 | `7-cleaning.sh` | `7-cleaning.R` (<10 min) |
+| 9 | `7.5-plot_labels.sh` | `7.5-plot_labels.R` (<10 min)|
+| 10 | `7.6-plot_functions.sh` | `7.6-plot_functions.R` (<10 min)|
+| 11 | `8-imputation_full_dataset.sh` | `8-imputation_full_dataset.R` (6h)|
+| 12 | `9-table1.sh` | `9-table1.R` (<10 min)|
+| 13 | `10-imputation_split_dataset.sh` | `10-dataset_splitting.R` (<10 min)|
+| 14 | `11a_selection_imputation.sh` | `11a_impute_selection.R` (3h)|
+| 15 | `11b_refit_imputation.sh` | `11b_impute_refit.R` (~1.5h)|
+| 16 | `11c_test_imputation.sh` | `11c_impute_test.R` (~1.5h)|
+| 17 | `12-lasso_stability_selection_model1.sh` | `12-lasso_stability_selection_model1.R` (~3h)|
+| 18 | `13-elastic_stability_selection_model1.sh` | `13-elastic_net_stability_selection_model1.R` (~3h)|
+| 19 | `14-model1_refit_logistic.sh` | `14-model1_refit_logistic.R` (<10 min)|
+| 20 | `15-python-boost.sh` | `15-python-boost.py` (<1h)|
+| 21 | `16-python_xgboost_602020.sh` | `16-python_xgboost_602020.py` (<1h)|
+| 22 | `17-neural_network.sh` | `17-neural_network.py` (<1h)|
+| 23 | `18-final_analysis_mediation.sh` | `18-final_analysis_mediation.R` (~40h-50***???)|
+| 24 | `19-mediation_dag_figures.sh` | `19-mediation_dag_figures.R` (<10 min)|
+| 25 | `20-mediation_figures_heatmaps.sh` | `20-mediation_figures_heatmaps.R` (<10 min)|
+| 26 | `21-lasso_forest.sh` | `21-lasso_forest.R` (<10 min)|
+| 27 | `22-lasso_incremental.sh` | `22-lasso_incremental.R` (<10 min)|
+| 28 | `23-elastic_net_forest.sh` | `23-elastic_net_forest.R` (<10 min)|
+| 29 | `24-elastic_net_incremental.sh` | `24-elastic_net_incremental.R` (<10 min)|
+| 30 | `25-uni_analysis_combined.sh` | `25-uni_analysis_combined.R` (<10 min)|
+| 31 | `26-forest_plot_combined.sh` | `26-forest_plot_combined.R` (<10 min)|
+| 32 | `27-comparison_ROC.sh` | `27-comparison_ROC.R` (<10 min)|
+| 33 | `28-PCA.sh` | `28-PCA.R` (~30 min)|
+| 34 | `29-xgboost-analysis.sh` | `29-xgboost-analysis.R` (~15 min)|
 
 ---
+
 
 ## Pipeline Summary
 
