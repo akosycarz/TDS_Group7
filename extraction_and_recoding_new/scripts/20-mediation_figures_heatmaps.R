@@ -7,7 +7,7 @@ library(ggplot2)
 library(cowplot)
 
 # ── Data ──────────────────────────────────────────────────────────────────────
-base_dir <- "../outputs"
+base_dir <- "../outputs/summary"
 df <- read.csv(file.path(base_dir, "model1_mediation_indirect_effects_FINAL_6.csv"))
 
 plot_labels  <- read.csv(file.path(base_dir, "plot_labels_domain.csv"), stringsAsFactors = FALSE)

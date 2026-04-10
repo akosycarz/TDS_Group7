@@ -16,7 +16,7 @@ library(pROC)
 
 # Shared plot functions (forest plot + incremental AUC)
 # Resolve path relative to this script's own directory
-source("/rds/general/project/hda_25-26/live/TDS/TDS_Group7/extraction_and_recoding_new/scripts/7.6-plot_functions.R")
+source("7.6-plot_functions.R")
 
 set.seed(123)
 
@@ -24,8 +24,7 @@ set.seed(123)
 # 0. INPUTS
 # ============================================================
 
-output_dir <- "../outputs"
-if (!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
+output_dir <- "../outputs/summary"
 
 # Determine TOP_N dynamically: max of Lasso and Elastic Net stable feature counts
 read_n_stable <- function(path) {
@@ -35,8 +34,8 @@ read_n_stable <- function(path) {
   )
 }
 
-lasso_n   <- read_n_stable("../outputs/model1_lasso_stability_summary.csv")
-elastic_n <- read_n_stable("../outputs/model1_stability_summary.csv")
+lasso_n   <- read_n_stable("../outputs/summary/model1_lasso_stability_summary.csv")
+elastic_n <- read_n_stable("../outputs/summary/model1_stability_summary.csv")
 TOP_N     <- max(lasso_n, elastic_n)
 
 if (TOP_N == 0L) {
@@ -50,7 +49,7 @@ if (TOP_N == 0L) {
 }
 
 # Load SHAP importance and take top TOP_N features
-shap_df <- read_csv("../outputs/XGBoost_results/shap_importance.csv",
+shap_df <- read_csv("../outputs/summary/XGBoost_results/shap_importance.csv",
                     show_col_types = FALSE)
 
 shap_top <- shap_df %>%

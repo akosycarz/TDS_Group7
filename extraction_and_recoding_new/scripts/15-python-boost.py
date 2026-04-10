@@ -17,7 +17,7 @@ from sklearn.metrics import (
     confusion_matrix, ConfusionMatrixDisplay, average_precision_score
 )
 # ─── 0. CONFIG ────────────────────────────────────────────────────────────────
-RESULTS_DIR = "../outputs"
+RESULTS_DIR = "../outputs/summary"
 os.makedirs(RESULTS_DIR, exist_ok=True)
 N_TRIALS = 50
 CV_FOLDS = 5

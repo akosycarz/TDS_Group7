@@ -9,7 +9,10 @@ suppressPackageStartupMessages({
 })
 # 1. Paths
 input_path <- "../outputs/ukb_selection_60_imputed.rds"
-output_dir <- "../outputs"
+output_dir <- "../outputs/summary"
+
+if (!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
+
 # 2. Settings
 seed_value   <- 42
 K_subsamples <- 100

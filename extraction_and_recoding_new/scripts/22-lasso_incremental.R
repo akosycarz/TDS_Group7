@@ -22,7 +22,7 @@ set.seed(123)
 # ============================================================
 
 stable_vars <- read_csv(
-  "../outputs/model1_lasso_stable_variables.csv",
+  "../outputs/summary/model1_lasso_stable_variables.csv",
   show_col_types = FALSE
 )
 
@@ -255,7 +255,7 @@ print(cum_auc_exposure_df)
 
 write_csv(
   cum_auc_exposure_df,
-  "../outputs/lasso_incremental_auc_summary_exposure.csv"
+  "../outputs/summary/lasso_incremental_auc_summary_exposure.csv"
 )
 
 # ============================================================
@@ -282,7 +282,7 @@ print(cum_auc_all_df)
 
 write_csv(
   cum_auc_all_df,
-  "../outputs/lasso_incremental_auc_summary_all.csv"
+  "../outputs/summary/lasso_incremental_auc_summary_all.csv"
 )
 
 # ============================================================
@@ -318,14 +318,14 @@ p_cum_auc_exposure <- ggplot(
 print(p_cum_auc_exposure)
 
 ggsave(
-  filename = "../outputs/lasso_incremental_auc_exposure.png",
+  filename = "../outputs/summary/lasso_incremental_auc_exposure.png",
   plot = p_cum_auc_exposure,
   width = 10,
   height = 6,
   dpi = 300
 )
 
-cat("Saved: ../outputs/lasso_incremental_auc_exposure.png\n")
+cat("Saved: ../outputs/summary/lasso_incremental_auc_exposure.png\n")
 
 # ============================================================
 # 8. ALL-STABLE-VARIABLE INCREMENTAL AUC PLOT
@@ -369,14 +369,14 @@ p_cum_auc_all <- ggplot(
 print(p_cum_auc_all)
 
 ggsave(
-  filename = "../outputs/lasso_incremental_auc_all.png",
+  filename = "../outputs/summary/lasso_incremental_auc_all.png",
   plot = p_cum_auc_all,
   width = 11,
   height = 6,
   dpi = 300
 )
 
-cat("Saved: ../outputs/lasso_incremental_auc_all.png\n")
+cat("Saved: ../outputs/summary/lasso_incremental_auc_all.png\n")
 
 # ============================================================
 # 9. FINAL PRINTED SUMMARY

@@ -34,7 +34,7 @@ run_step () {
   "$@"
 }
 
-# 🚀 Pipeline steps (ALL keep array index)
+# Pipeline steps (ALL keep array index)
 run_step Rscript 8-imputation_full_dataset.R "${PBS_ARRAY_INDEX}"
 run_step Rscript 10-dataset_splitting.R "${PBS_ARRAY_INDEX}"
 run_step Rscript 9-table1.R "${PBS_ARRAY_INDEX}"

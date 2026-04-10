@@ -22,7 +22,7 @@ suppressPackageStartupMessages({
 # Input files
 # ============================================================
 
-results_file <- "../outputs/uni_analysis_combined.csv"
+results_file <- "../outputs/summary/uni_analysis_combined.csv"
 label_file   <- "../outputs/plot_labels_domain.csv"
 
 if (!file.exists(results_file)) {
@@ -44,7 +44,7 @@ label_table <- read.csv(label_file, stringsAsFactors = FALSE)
 # Output directory
 # ============================================================
 
-output_dir <- "../outputs"
+output_dir <- "../outputs/summary"
 
 if (!dir.exists(output_dir)) {
   stop(paste("Output directory not found:", output_dir))

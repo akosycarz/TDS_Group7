@@ -80,8 +80,8 @@ tab1_imputed  <- make_table1(ukb_imputed)
 
 # ---- 6) Save helper ----
 save_table_png <- function(tab, filename) {
-  if (!dir.exists("../outputs")) dir.create("../outputs", recursive = TRUE)
-  png_file <- file.path("../outputs", filename)
+  if (!dir.exists("../outputs/summary")) dir.create("../outputs/summary", recursive = TRUE)
+  png_file <- file.path("../outputs/summary", filename)
   tmp_html <- tempfile(fileext = ".html")
   on.exit(unlink(tmp_html), add = TRUE)
   htmltools::save_html(tab, file = tmp_html)

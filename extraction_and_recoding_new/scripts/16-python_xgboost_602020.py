@@ -17,7 +17,7 @@ from sklearn.metrics import (
     confusion_matrix, ConfusionMatrixDisplay, average_precision_score
 )
 # ─── 0. CONFIG ────────────────────────────────────────────────────────────────
-RESULTS_DIR = "../outputs/XGBoost_results"
+RESULTS_DIR = "../outputs/summary/XGBoost_results"
 os.makedirs(RESULTS_DIR, exist_ok=True)
 N_TRIALS = 50
 CV_FOLDS = 5
@@ -49,8 +49,8 @@ def _read_n_stable(csv_path, col="n_stable_total"):
     except Exception:
         return 0
 
-_lasso_n   = _read_n_stable("../outputs/model1_lasso_stability_summary.csv")
-_elastic_n = _read_n_stable("../outputs/model1_stability_summary.csv")
+_lasso_n   = _read_n_stable("../outputs/summary/model1_lasso_stability_summary.csv")
+_elastic_n = _read_n_stable("../outputs/summary/model1_stability_summary.csv")
 TOP_N      = max(_lasso_n, _elastic_n)
 if TOP_N == 0:
     TOP_N = 20

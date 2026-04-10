@@ -44,14 +44,14 @@ set.seed(123)
 # 0. INPUTS
 # ============================================================
 
-output_dir <- "../outputs"
+output_dir <- "../outputs/summary"
 
 if (!dir.exists(output_dir)) {
   dir.create(output_dir, recursive = TRUE)
 }
 
 # Single stable-variable file
-stable_file <- "../outputs/model1_stable_variables.csv"
+stable_file <- "../outputs/summary/model1_stable_variables.csv"
 
 # Optional total forest plot
 make_total_plot <- TRUE

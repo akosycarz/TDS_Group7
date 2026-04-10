@@ -17,7 +17,7 @@ set.seed(123)
 # 0. INPUTS
 # ============================================================
 
-output_dir <- "../outputs"
+output_dir <- "../outputs/summary"
 if (!dir.exists(output_dir)) {
   dir.create(output_dir, recursive = TRUE)
 }
@@ -35,7 +35,7 @@ elastic_stable_vars <- read_csv(
 )
 
 # XGBoost-selected variables from txt file
-xgb_txt_file <- "../outputs/XGBoost_results/selected_features.txt"
+xgb_txt_file <- "../outputs/summary/XGBoost_results/selected_features.txt"
 
 xgb_lines <- readLines(xgb_txt_file, warn = FALSE)
 

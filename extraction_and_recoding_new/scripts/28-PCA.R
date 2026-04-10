@@ -160,7 +160,7 @@ cat("\n")
 # ------------------------------------------------------------
 # 9. Output directory & shared theme
 # ------------------------------------------------------------
-out_dir  <- "../outputs/PCA_results"
+out_dir  <- "../outputs/summary/PCA_results"
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 
 pca_theme <- theme_bw(base_size = 14) +

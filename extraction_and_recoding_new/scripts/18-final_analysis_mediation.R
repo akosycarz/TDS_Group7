@@ -63,11 +63,13 @@ future::plan(multicore, workers = n_cores)
 # 1. Define Paths & Load Data (STRICTLY FROM SCRIPT 11)
 # =========================================================
 base_dir               <- "../outputs"
+base_dir_1               <- "../outputs/summary"
+
 refit_data_path        <- file.path(base_dir, "ukb_refit_20_imputed.rds")
-stable_vars_path       <- file.path(base_dir, "model1_stable_variables.csv")
-total_path_c_path      <- file.path(base_dir, "model1_refit_ORs_total_effect_pathC.csv")
-direct_and_path_b_path <- file.path(base_dir, "model1_refit_ORs_direct_and_pathB.csv")
-output_file            <- file.path(base_dir, "model1_mediation_indirect_effects_FINAL_6.csv")
+stable_vars_path       <- file.path(base_dir_1, "model1_stable_variables.csv")
+total_path_c_path      <- file.path(base_dir_1, "model1_refit_ORs_total_effect_pathC.csv")
+direct_and_path_b_path <- file.path(base_dir_1, "model1_refit_ORs_direct_and_pathB.csv")
+output_file            <- file.path(base_dir_1, "model1_mediation_indirect_effects_FINAL_6.csv")
 
 message("Loading pre-cleaned data and Script 11 baselines...")
 df_refit <- readRDS(refit_data_path)

@@ -16,8 +16,10 @@ suppressPackageStartupMessages({
 
 # 1. Define Paths
 base_dir         <- "../outputs"
+base_dir_1         <- "../outputs/summary"
+
 refit_data_path  <- file.path(base_dir, "ukb_refit_20_imputed.rds")
-stable_vars_path <- file.path(base_dir, "model1_stable_variables.csv")
+stable_vars_path <- file.path(base_dir_1, "model1_stable_variables.csv")
 
 # 2. Load Data
 message("Loading refit set and Elastic Net stable variables...")
@@ -67,11 +69,11 @@ print(head(results_total_path_c %>% arrange(p.value), 10))
 
 # 7. Save Outputs
 write.csv(results_total_path_c, 
-          file.path(base_dir, "model1_refit_ORs_total_effect_pathC.csv"), 
+          file.path(base_dir_1, "model1_refit_ORs_total_effect_pathC.csv"), 
           row.names = FALSE)
 
 write.csv(results_direct_and_path_b, 
-          file.path(base_dir, "model1_refit_ORs_direct_and_pathB.csv"), 
+          file.path(base_dir_1, "model1_refit_ORs_direct_and_pathB.csv"), 
           row.names = FALSE)
 
 message("\n=== Refit Stage Complete ===")

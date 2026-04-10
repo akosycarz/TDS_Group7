@@ -516,7 +516,7 @@ print(head(results_tbl, 30))
 # -----------------------------
 # 9) Export full results
 # -----------------------------
-output_dir <- "../outputs"
+output_dir <- "../outputs/summary"
 dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
 
 write.csv(

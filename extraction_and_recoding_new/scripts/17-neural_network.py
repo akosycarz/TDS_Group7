@@ -21,7 +21,7 @@ from sklearn.metrics import (
 )
 
 # ─── 0. CONFIG ────────────────────────────────────────────────────────────────
-RESULTS_DIR = "../outputs/NN_results"
+RESULTS_DIR = "../outputs/summary/NN_results"
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
 BASE_PATH   = "../outputs"
