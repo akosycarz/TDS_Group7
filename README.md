@@ -33,44 +33,42 @@ Each .sh file submits the corresponding .R or .py script to the HPC scheduler.
 
 ## Pipeline Summary
 
-| Stage | Script | Input Files | Output Files |
-|---|---|---|---|
-| 1 | `2-extract_selected.R` | `selection.xlsx`<br>`Codings.csv`<br>`UKB raw file` | `annot.rds`<br>`ukb_extracted.rds`<br>`codes_<ID>.txt`<br>`codes_template_continuous.txt` |
-| 2 | `3-recode_variables_change.R` | `annot.rds`<br>`ukb_extracted.rds`<br>`codes_<ID>.txt`<br>`codes_field*` | `ukb_recoded_changed.rds`<br>`parameters_changed.xlsx` |
-| 3 | `4-recoding.R` | `ukb_recoded_changed.rds`<br>`annot.rds` | `ukb_recoded_by_script.rds` |
-| 4 | `5-collapsing.R` | `ukb_recoded_changed.rds` | `ukb_collapsed.rds` |
-| 5 | `5.5-feature_engineering.R` | `ukb_collapsed.rds` | `ukb_collapsed2.rds` |
-| 6 | `6-preprocessing.R` | `ukb_collapsed2.rds` | `ukb_collapsed3.rds` |
-| 7 | `6.5-releveling.R` | `ukb_collapsed3.rds` | `ukb_collapsed4.rds` |
-| 8 | `7-cleaning.R` | `ukb_collapsed4.rds` | `NA_not_missing.rds`<br>`ukb_cleaned.rds` |
-| 9 | `7.5-plot_labels.R` | `ukb_collapsed4.rds` | `plot_labels_domain.csv` |
-| 10 | `7.6-plot_functions.R` | `plot_labels_domain.csv` | `None directly` |
-| 11 | `8-imputation_full_dataset.R` | `ukb_cleaned.rds` | `ukb_final_imputed.rds` |
-| 12 | `9-table1.R` | `ukb_cleaned.rds`<br>`ukb_final_imputed.rds` | `table1_before_imputation.png`<br>`table1_imputed.png` |
-| 13 | `10-dataset_splitting.R` | `ukb_cleaned.rds` | `ukb_selection_60_raw.rds`<br>`ukb_refit_20_raw.rds`<br>`ukb_test_20_raw.rds` |
-| 14 | `11a_impute_selection.R` | `ukb_selection_60_raw.rds` | `ukb_selection_60_imputed.rds`<br>`ukb_selection_60_impute_model.rds` |
-| 15 | `11b_impute_refit.R` | `ukb_refit_20_raw.rds` | `ukb_refit_20_imputed.rds`<br>`ukb_refit_20_impute_model.rds` |
-| 16 | `11c_impute_test.R` | `ukb_test_20_raw.rds`<br>`ukb_refit_20_impute_model.rds` | `ukb_test_20_imputed.rds` |
-| 17 | `12-lasso_stability_selection_model1.R` | `ukb_selection_60_imputed.rds` | `model1_lasso_stability_object.rds`<br>`model1_lasso_stability_summary.csv`<br>`model1_lasso_stable_variables.csv`<br>`model1_lasso_all_selection_proportions.csv`<br>`model1_lasso_stable_exposures.csv`<br>`model1_lasso_calibration_plot.pdf`<br>`model1_lasso_selection_proportions.pdf` |
-| 18 | `13-elastic_net_stability_selection_model1.R` | `ukb_selection_60_imputed.rds` | `model1_stability_object.rds`<br>`model1_stability_summary.csv`<br>`model1_stable_variables.csv`<br>`model1_all_selection_proportions.csv`<br>`model1_stable_exposures.csv`<br>`model1_calibration_plot.pdf`<br>`model1_selection_proportions.pdf` |
-| 19 | `14-model1_refit_logistic.R` | `ukb_refit_20_imputed.rds`<br>`model1_stable_variables.csv` | `model1_refit_ORs_total_effect_pathC.csv`<br>`model1_refit_ORs_direct_and_pathB.csv` |
-| 20 | `15-python-boost.py` | `ukb_final_imputed.rds` | `shap_incremental_auc.png`<br>`metrics_comparison.csv`<br>`selected_features.txt`<br>`shap_importance.csv`<br>`model_comparison.png`<br>`confusion_matrices.png`<br>`precision_recall.png`<br>`shap_beeswarm.png`<br>`shap_importance.png`<br>`shap_incrementation.png`<br>`cv_history.png`<br>`report_xgboost.pdf` |
-| 21 | `16-python_xgboost_602020.py` | `model1_lasso_stability_summary.csv`<br>`model1_stability_summary.csv`<br>`ukb_selection_60_imputed.rds`<br>`ukb_refit_20_imputed.rds`<br>`ukb_test_20_imputed.rds` | `XGBoost_results/shap_incremental_auc.png`<br>`XGBoost_results/metrics_comparison.csv`<br>`XGBoost_results/selected_features.txt`<br>`XGBoost_results/shap_importance.csv`<br>`XGBoost_results/model_comparison.png`<br>`XGBoost_results/confusion_matrices.png`<br>`XGBoost_results/precision_recall.png`<br>`XGBoost_results/shap_beeswarm.png`<br>`XGBoost_results/shap_importance.png`<br>`XGBoost_results/shap_incrementation.png`<br>`XGBoost_results/cv_history.png`<br>`XGBoost_results/report_xgboost.pdf` |
-| 22 | `17-neural_network.py` | `ukb_selection_60_imputed.rds`<br>`ukb_refit_20_imputed.rds`<br>`ukb_test_20_imputed.rds` | `NN_results/nn_training_curve.png`<br>`NN_results/nn_results.png`<br>`NN_results/nn_confusion_matrices.png`<br>`NN_results/nn_cv_auc.png`<br>`NN_results/nn_metrics.csv`<br>`NN_results/nn_best_weights.pt` |
-| 23 | `18-final_analysis_mediation.R` | `ukb_refit_20_imputed.rds`<br>`model1_stable_variables.csv`<br>`model1_refit_ORs_total_effect_pathC.csv`<br>`model1_refit_ORs_direct_and_pathB.csv` | `model1_mediation_indirect_effects_FINAL_6.csv` |
-| 24 | `19-mediation_dag_figures.R` | `model1_mediation_indirect_effects_FINAL_6.csv`<br>`plot_labels_domain.csv` | `mediation_fig_dags.pdf` |
-| 25 | `20-mediation_figures_heatmaps.R` | `model1_mediation_indirect_effects_FINAL_6.csv`<br>`plot_labels_domain.csv` | `mediation_fig_heatmaps.pdf` |
-| 26 | `21-lasso_forest.R` | `model1_lasso_stable_variables.csv`<br>`plot_labels_domain.csv`<br>`ukb_refit_20_imputed.rds` | `total_lasso_logistic_summary.csv`<br>`total_lasso_subsample_summary.csv`<br>`total_lasso_forest_all.pdf`<br>`direct_lasso_logistic_summary.csv`<br>`direct_lasso_subsample_summary.csv`<br>`direct_lasso_forest_exposure.pdf` |
-| 27 | `22-lasso_incremental.R` | `model1_lasso_stable_variables.csv`<br>`plot_labels_domain.csv`<br>`ukb_refit_20_imputed.rds`<br>`ukb_test_20_imputed.rds` | `lasso_incremental_auc_summary_exposure.csv`<br>`lasso_incremental_auc_summary_all.csv`<br>`lasso_incremental_auc_exposure.png`<br>`lasso_incremental_auc_all.png` |
-| 28 | `23-elastic_net_forest.R` | `model1_stable_variables.csv`<br>`plot_labels_domain.csv`<br>`ukb_refit_20_imputed.rds` | `total_elastic_net_logistic_summary.csv`<br>`total_elastic_net_subsample_summary.csv`<br>`total_elastic_net_forest_all.pdf`<br>`direct_elastic_net_logistic_summary.csv`<br>`direct_elastic_net_subsample_summary.csv`<br>`direct_elastic_net_forest_exposure.pdf` |
-| 29 | `24-elastic_net_incremental.R` | `model1_stable_variables.csv`<br>`plot_labels_domain.csv`<br>`ukb_refit_20_imputed.rds`<br>`ukb_test_20_imputed.rds` | `elastic_net_incremental_auc_summary_exposure.csv`<br>`elastic_net_incremental_auc_summary_all.csv`<br>`elastic_net_incremental_auc_exposure.png`<br>`elastic_net_incremental_auc_all.png` |
-| 30 | `25-uni_analysis_combined.R` | `ukb_final_imputed.rds` | `uni_analysis_combined.csv`<br>`uni_analysis_combined_table.csv` |
-| 31 | `26-forest_plot_combined.R` | `uni_analysis_combined.csv`<br>`plot_labels_domain.csv` | `forest_<domain>.pdf` |
-| 32 | `27-comparison_ROC.R` | `model1_lasso_stable_variables.csv`<br>`model1_stable_variables.csv`<br>`selected_features.txt`<br>`ukb_refit_20_imputed.rds`<br>`ukb_test_20_imputed.rds` | `model_comparison_auc_summary.csv`<br>`model_comparison_roc.png`<br>`model_comparison_roc_points.csv` |
-| 33 | `28-PCA.R` | `ukb_selection_60_imputed.rds` | `PCA_results/pca_case_control.png`<br>`PCA_results/pca_sex.png`<br>`PCA_results/pca_age.png`<br>`PCA_results/pca_ethnicity.png`<br>`PCA_results/scree_plot.png`<br>`PCA_results/cumulative_variance.png`<br>`PCA_results/loadings_plot.png`<br>`PCA_results/pca_variance_explained.csv`<br>`PCA_results/pca_loadings_all.csv`<br>`PCA_results/pca_scores_first5PCs.csv` |
-| 34 | `29-xgboost-analysis.R` | `model1_lasso_stability_summary.csv`<br>`model1_stability_summary.csv`<br>`XGBoost_results/shap_importance.csv`<br>`ukb_refit_20_imputed.rds`<br>`ukb_test_20_imputed.rds`<br>`7.6-plot_functions.R` | `xgboost_shap_refit_forest.pdf`<br>`xgboost_shap_subsample_summary.csv`<br>`xgboost_shap_incremental_auc_summary.csv`<br>`xgboost_shap_incremental_auc.png` |
-
----
+| Stage | Script | Inputs | Outputs (`outputs/`) | Outputs (`outputs/summary/`) |
+|------|--------|--------|----------------------|------------------------------|
+| 1 | `2-extract_selected.R` | `selection.xlsx`<br>`Codings.csv`<br>`UKB raw file` | `annot.rds`<br>`ukb_extracted.rds`<br>`codes_<ID>.txt`<br>`codes_template_continuous.txt` | |
+| 2 | `3-recode_variables_change.R` | `annot.rds`<br>`ukb_extracted.rds`<br>`codes_<ID>.txt`<br>`codes_field*` | `ukb_recoded_changed.rds`<br>`parameters_changed.xlsx` | |
+| 3 | `4-recoding.R` | `ukb_recoded_changed.rds`<br>`annot.rds` | `ukb_recoded_by_script.rds` | |
+| 4 | `5-collapsing.R` | `ukb_recoded_changed.rds` | `ukb_collapsed.rds` | |
+| 5 | `5.5-feature_engineering.R` | `ukb_collapsed.rds` | `ukb_collapsed2.rds` | |
+| 6 | `6-preprocessing.R` | `ukb_collapsed2.rds` | `ukb_collapsed3.rds` | |
+| 7 | `6.5-releveling.R` | `ukb_collapsed3.rds` | `ukb_collapsed4.rds` | |
+| 8 | `7-cleaning.R` | `ukb_collapsed4.rds` | `NA_not_missing.rds`<br>`ukb_cleaned.rds` | |
+| 9 | `7.5-plot_labels.R` | `ukb_collapsed4.rds` | `plot_labels_domain.csv` | |
+| 10 | `7.6-plot_functions.R` | `plot_labels_domain.csv` | _None_ | |
+| 11 | `8-imputation_full_dataset.R` | `ukb_cleaned.rds` | `ukb_final_imputed.rds` | |
+| 12 | `9-table1.R` | `ukb_cleaned.rds`<br>`ukb_final_imputed.rds` | | `table1_before_imputation.png`<br>`table1_imputed.png` |
+| 13 | `10-dataset_splitting.R` | `ukb_cleaned.rds` | `ukb_selection_60_raw.rds`<br>`ukb_refit_20_raw.rds`<br>`ukb_test_20_raw.rds` | |
+| 14 | `11a_impute_selection.R` | `ukb_selection_60_raw.rds` | `ukb_selection_60_imputed.rds`<br>`ukb_selection_60_impute_model.rds` | |
+| 15 | `11b_impute_refit.R` | `ukb_refit_20_raw.rds` | `ukb_refit_20_imputed.rds`<br>`ukb_refit_20_impute_model.rds` | |
+| 16 | `11c_impute_test.R` | `ukb_test_20_raw.rds`<br>`ukb_refit_20_impute_model.rds` | `ukb_test_20_imputed.rds` | |
+| 17 | `12-lasso_stability_selection_model1.R` | `ukb_selection_60_imputed.rds` | | `model1_lasso_stability_object.rds`<br>`model1_lasso_stability_summary.csv`<br>`model1_lasso_stable_variables.csv`<br>`model1_lasso_all_selection_proportions.csv`<br>`model1_lasso_stable_exposures.csv`<br>`model1_lasso_calibration_plot.pdf`<br>`model1_lasso_selection_proportions.pdf` |
+| 18 | `13-elastic_net_stability_selection_model1.R` | `ukb_selection_60_imputed.rds` | | `model1_stability_object.rds`<br>`model1_stability_summary.csv`<br>`model1_stable_variables.csv`<br>`model1_all_selection_proportions.csv`<br>`model1_stable_exposures.csv`<br>`model1_calibration_plot.pdf`<br>`model1_selection_proportions.pdf` |
+| 19 | `14-model1_refit_logistic.R` | `ukb_refit_20_imputed.rds`<br>`model1_stable_variables.csv` | | `model1_refit_ORs_total_effect_pathC.csv`<br>`model1_refit_ORs_direct_and_pathB.csv` |
+| 20 | `15-python-boost.py` | `ukb_final_imputed.rds` | | `shap_incremental_auc.png`<br>`metrics_comparison.csv`<br>`selected_features.txt`<br>`shap_importance.csv`<br>`model_comparison.png`<br>`confusion_matrices.png`<br>`precision_recall.png`<br>`shap_beeswarm.png`<br>`shap_importance.png`<br>`shap_incrementation.png`<br>`cv_history.png`<br>`report_xgboost.pdf` |
+| 21 | `16-python_xgboost_602020.py` | `model1_lasso_stability_summary.csv`<br>`model1_stability_summary.csv`<br>`ukb_selection_60_imputed.rds`<br>`ukb_refit_20_imputed.rds`<br>`ukb_test_20_imputed.rds` | `XGBoost_results/...` | |
+| 22 | `17-neural_network.py` | `ukb_selection_60_imputed.rds`<br>`ukb_refit_20_imputed.rds`<br>`ukb_test_20_imputed.rds` | | `NN_results/...` |
+| 23 | `18-final_analysis_mediation.R` | `ukb_refit_20_imputed.rds`<br>`model1_stable_variables.csv`<br>`model1_refit_ORs_total_effect_pathC.csv`<br>`model1_refit_ORs_direct_and_pathB.csv` | | `model1_mediation_indirect_effects_FINAL_6.csv` |
+| 24 | `19-mediation_dag_figures.R` | `model1_mediation_indirect_effects_FINAL_6.csv`<br>`plot_labels_domain.csv` | | `mediation_fig_dags.pdf` |
+| 25 | `20-mediation_figures_heatmaps.R` | `model1_mediation_indirect_effects_FINAL_6.csv`<br>`plot_labels_domain.csv` | | `mediation_fig_heatmaps.pdf` |
+| 26 | `21-lasso_forest.R` | `model1_lasso_stable_variables.csv`<br>`plot_labels_domain.csv`<br>`ukb_refit_20_imputed.rds` | | `total_lasso_*`<br>`direct_lasso_*` |
+| 27 | `22-lasso_incremental.R` | `model1_lasso_stable_variables.csv`<br>`plot_labels_domain.csv`<br>`ukb_refit_20_imputed.rds`<br>`ukb_test_20_imputed.rds` | | `lasso_incremental_*` |
+| 28 | `23-elastic_net_forest.R` | `model1_stable_variables.csv`<br>`plot_labels_domain.csv`<br>`ukb_refit_20_imputed.rds` | | `total_elastic_net_*`<br>`direct_elastic_net_*` |
+| 29 | `24-elastic_net_incremental.R` | `model1_stable_variables.csv`<br>`plot_labels_domain.csv`<br>`ukb_refit_20_imputed.rds`<br>`ukb_test_20_imputed.rds` | | `elastic_net_incremental_*` |
+| 30 | `25-uni_analysis_combined.R` | `ukb_final_imputed.rds` | | `uni_analysis_combined.csv`<br>`uni_analysis_combined_table.csv` |
+| 31 | `26-forest_plot_combined.R` | `uni_analysis_combined.csv`<br>`plot_labels_domain.csv` | | `forest_<domain>.pdf` |
+| 32 | `27-comparison_ROC.R` | `model1_lasso_stable_variables.csv`<br>`model1_stable_variables.csv`<br>`selected_features.txt`<br>`ukb_refit_20_imputed.rds`<br>`ukb_test_20_imputed.rds` | | `model_comparison_*` |
+| 33 | `28-PCA.R` | `ukb_selection_60_imputed.rds` | | `PCA_results/...` |
+| 34 | `29-xgboost-analysis.R` | `model1_lasso_stability_summary.csv`<br>`model1_stability_summary.csv`<br>`XGBoost_results/shap_importance.csv`<br>`ukb_refit_20_imputed.rds`<br>`ukb_test_20_imputed.rds`<br>`7.6-plot_functions.R` | | `xgboost_shap_*` |
 
 ## Pipeline Dependency Overview
 
