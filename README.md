@@ -64,7 +64,7 @@ Each .sh file submits the corresponding `.R` or `.py` script to the HPC schedule
 | 2 | `3-recode_variables_change.R` | `annot.rds`<br>`ukb_extracted.rds`<br>`codes_<ID>.txt`<br>`codes_field*` | `ukb_recoded_changed.rds`<br>`parameters_changed.xlsx` |
 | 3 | `4-recoding.R` | `ukb_recoded_changed.rds`<br>`annot.rds` | `ukb_recoded_by_script.rds` |
 | 4 | `5-collapsing.R` | `ukb_recoded_changed.rds` | `ukb_collapsed.rds` |
-| 5 | `5.5-feature_engineering.R` | `ukb_collapsed.rds`<br>`cvd_events.rds` | `ukb_collapsed2.rds` |
+| 5 | `5.5-feature_engineering.R` | `ukb_collapsed.rds`<br>`cvd_events_real.rds` | `ukb_collapsed2.rds` |
 | 6 | `6-preprocessing.R` | `ukb_collapsed2.rds` | `ukb_collapsed3.rds` |
 | 7 | `6.5-releveling.R` | `ukb_collapsed3.rds` | `ukb_collapsed4.rds` |
 | 8 | `7-cleaning.R` | `ukb_collapsed4.rds` | `NA_not_missing.rds`<br>`ukb_cleaned.rds` |
@@ -200,7 +200,7 @@ Applies **custom collapsing** of specific UKB coding IDs (e.g. ethnicity groupin
 ###  Collapsing (`5-collapsing.R`)
 Inputs: 
 - `ukb_recoded_changed.rds`
-- `cvd_events.rds` (path specified in the corresponding .sh script)
+- `cvd_events_real.rds` (path specified in the corresponding .sh script)
 
 Outputs:
 - `ukb_collapsed.rds`
@@ -209,7 +209,7 @@ Collapses multi-reading/multi-array variables into single summary columns:
 - **Systolic & diastolic BP**: mean of automated readings, fallback to manual
 - **FVC / FEV1**: best of three blows
 - **Qualifications / Employment**: highest-priority category across array slots
-- **CVD outcome**: merges in `cvd_events.rds` (date of first event or `"No"`)
+- **CVD outcome**: merges in `cvd_events_real.rds` (date of first event or `"No"`)
 
 ---
 

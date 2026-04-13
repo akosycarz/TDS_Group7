@@ -11,7 +11,7 @@ mkdir -p "$console_dir"
 
 eval "$(~/anaconda3/bin/conda shell.bash hook)" || exit 1
 
-conda activate r413 || exit 1
+source activate phd_r || exit 1
 
 # Run the R script and save console output to logs
 Rscript 24-elastic_net_incremental.R > "${console_dir}/${PBS_JOBNAME}_${PBS_JOBID}.out" 2>&1

@@ -13,7 +13,7 @@ cd "${PBS_O_WORKDIR}/scripts"
 
 # Logging
 LOGDIR="${PBS_O_WORKDIR}/logs"
-mkdir -p "$LOGDIR"
+mkdir -p "${LOGDIR}"
 
 exec > >(tee -a "${LOGDIR}/imputation.${PBS_JOBID}.${PBS_ARRAY_INDEX}.out")
 exec 2> >(tee -a "${LOGDIR}/imputation.${PBS_JOBID}.${PBS_ARRAY_INDEX}.err" >&2)
@@ -21,8 +21,8 @@ exec 2> >(tee -a "${LOGDIR}/imputation.${PBS_JOBID}.${PBS_ARRAY_INDEX}.err" >&2)
 trap 'rc=$?; echo "ERROR at line ${LINENO}: ${BASH_COMMAND}" >&2; exit ${rc}' ERR
 
 # Activate conda
-eval "$(${HOME}/anaconda3/bin/conda shell.bash hook)"
-conda activate r45
+eval "$(~/anaconda3/bin/conda shell.bash hook)"
+source activate phd_r
 
 run_step () {
   echo ""

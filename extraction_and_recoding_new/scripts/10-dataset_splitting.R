@@ -10,6 +10,9 @@ library(dplyr)
 # ----------------
 df <- readRDS("../outputs/ukb_cleaned.rds")
 
+# remove columns that contain all missing values
+df <- df[ , colSums(!is.na(df)) > 0]
+
 # ----------------
 # 2. Binary outcome for stratification
 # ----------------

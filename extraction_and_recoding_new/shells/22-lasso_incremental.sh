@@ -11,7 +11,7 @@ mkdir -p "$console_dir"
 
 eval "$(~/anaconda3/bin/conda shell.bash hook)" || exit 1
 
-conda activate r413 || exit 1
+source activate phd_r || exit 1
 
 
 # Run the R script and save console output to logs

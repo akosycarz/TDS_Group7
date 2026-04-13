@@ -14,11 +14,11 @@ mkdir -p "$console_dir"
 
 # Activate conda
 eval "$(~/anaconda3/bin/conda shell.bash hook)" || exit 1
-conda activate r413 || exit 1
+source activate phd_r || exit 1
 
 # Paths used by some scripts
 ukb_path=/rds/general/project/hda_25-26/live/TDS/General/Data/tabular.tsv
-cvd_path=/rds/general/project/hda_25-26/live/TDS/TDS_Group7/extraction_and_recoding_new/cvd_events.rds
+cvd_path=/rds/general/project/hda_25-26/live/TDS/TDS_Group7/extraction_and_recoding_new/cvd_events_real.rds
 
 # Master log for the whole pipeline
 master_log="${console_dir}/${PBS_JOBNAME}_${PBS_JOBID}.out"

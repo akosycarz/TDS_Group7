@@ -18,7 +18,7 @@ exec > "$log_file" 2>&1
 
 # Activate conda
 eval "$(~/anaconda3/bin/conda shell.bash hook)"
-conda activate r413
+source activate phd_r
 
 echo "============================================"
 echo "Job ID:      $PBS_JOBID"
