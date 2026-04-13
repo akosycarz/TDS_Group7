@@ -48,3 +48,4 @@ Data/tmp/
 .RDataTmp
 .RData
 .Rhistory
+*.rds
